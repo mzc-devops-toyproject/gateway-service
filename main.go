@@ -49,7 +49,7 @@ func main() {
 		</div>`)
 	})
 	e.GET("/sunny.svg", func(c echo.Context) error {
-		return c.File("./sunny.png")
+		return c.File("./public/sunny.png")
 	})
 	e.GET(`health-check`, func(c echo.Context) error {
 		return c.JSON(http.StatusOK, models.ResponseJSON{
