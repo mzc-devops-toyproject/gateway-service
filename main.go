@@ -2,6 +2,7 @@ package main
 
 import (
 	"gopkg.in/mgo.v2/bson"
+	"time"
 	"github.com/mzc-devops-toyproject/gateway-service/models"
 	"flag"
 	"net/http"
@@ -56,6 +57,7 @@ func main() {
 			RequestID: bson.NewObjectId(),
 			Message: `Alive`,
 			Code: 200,
+			Timestamp: time.Now().Unix(),
 			Data: ``,
 		})
 	})
