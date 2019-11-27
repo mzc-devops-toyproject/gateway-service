@@ -18,6 +18,7 @@ metadata:
   name: gateway-service
   namespace: moodi
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: gateway-service

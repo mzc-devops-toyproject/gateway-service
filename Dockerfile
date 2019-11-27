@@ -3,13 +3,12 @@
 FROM golang:alpine AS build-env
 RUN apk update
 RUN apk add --no-cache git
-WORKDIR /src/gateway
-COPY . .
-RUN go get -d -v
-RUN cd /src/gateway && go build -o main.go
-
+WORKDIR /go/src/github.com/moodi/gateway-service
+COPY . /go/src/github.com/moodi/gateway-service
+RUN cd /go/src/github.com/moodi/gateway-service && go get -d -v
+RUN go build -o ./main
 FROM alpine
 WORKDIR /app
-COPY --from=build-env /src/gateway/ /app/
+COPY --from=build-env /go/src/github.com/moodi/gateway-service/main /app/
 ENTRYPOINT [ "./main" ]
 EXPOSE 80
