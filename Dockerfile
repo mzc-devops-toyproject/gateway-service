@@ -9,6 +9,8 @@ RUN cd /go/src/github.com/moodi/gateway-service && go get -d -v
 RUN go build -o ./main
 FROM alpine
 WORKDIR /app
+
 COPY --from=build-env /go/src/github.com/moodi/gateway-service/main /app/
+COPY --from=build-env /go/src/github.com/moodi/gateway-service/public /app/public
 ENTRYPOINT [ "./main" ]
 EXPOSE 80
