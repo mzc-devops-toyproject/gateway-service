@@ -1,6 +1,8 @@
 package main
 
 import (
+	"gopkg.in/mgo.v2/bson"
+	"github.com/mzc-devops-toyproject/gateway-service/models"
 	"flag"
 	"net/http"
 	"strconv"
@@ -19,6 +21,7 @@ func main() {
 	e := echo.New()
 	e.Use(middleware.Recover())
 	e.Use(middleware.Logger())
+	e.Use(middleware.CORS())
 
 	// Setup proxy
 	// url1, err := url.Parse("http://localhost:8081")
@@ -46,7 +49,15 @@ func main() {
 		</div>`)
 	})
 	e.GET("/sunny.svg", func(c echo.Context) error {
-		return c.File("./sunny.svg")
+		return c.File("./sunny.png")
+	})
+	e.GET(`health-check`, func(c echo.Context) error {
+		return c.JSON(http.StatusOK, models.ResponseJSON{
+			RequestID: bson.NewObjectId(),
+			Message: `Alive`,
+			Code: 200,
+			Data: ``,
+		})
 	})
 
 	e.Logger.Fatal(e.Start(":" + strconv.Itoa(*port)))
