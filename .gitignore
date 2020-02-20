@@ -1,2 +1,6 @@
 .vscode/
 main
+
+# Ignore DevSpace cache and log folder
+.devspace/
+.idea/
