@@ -15,6 +15,8 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  label:
+    k8s-app: gateway-service
   name: gateway-service
   namespace: moodi
 spec:
